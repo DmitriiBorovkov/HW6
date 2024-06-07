@@ -16,7 +16,7 @@ public class RegistrationPage {
             lastNameInput = $("#lastName"),
             emailInput = $("#userEmail"),
             genderWraper = $("#genterWrapper"),
-            userPhoneNumber = $("#userNumber"),
+            userPhoneNumberInput = $("#userNumber"),
             dateOfBirthInput = $("#dateOfBirthInput"),
             subjectsInput = $("#subjectsInput"),
             setHobbies = $("#hobbiesWrapper"),
@@ -31,7 +31,8 @@ public class RegistrationPage {
 
 
     CalendarComponents calendarComponents = new CalendarComponents();
-    private HashMap<String, String> userForm = new HashMap();
+    private HashMap<String, String> userFormMap = new HashMap(); // Ключ - название поля в результрующей таблице.
+                                                                 // Значение - данные, которые передавали в тесте
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
@@ -44,63 +45,63 @@ public class RegistrationPage {
     public RegistrationPage setNameAndLastname(String name, String lastName) {
         firstNameInput.setValue(name);
         lastNameInput.setValue(lastName);
-        userForm.put("Student Name", name + " " + lastName);
+        userFormMap.put("Student Name", name + " " + lastName);
         return this;
     }
 
     public RegistrationPage setEmail(String email) {
         emailInput.setValue(email);
-        userForm.put("Student Email", email);
+        userFormMap.put("Student Email", email);
         return this;
     }
 
     public RegistrationPage setGender(String gender) {
         genderWraper.$(byText(gender)).click();
-        userForm.put("Gender", gender);
+        userFormMap.put("Gender", gender);
         return this;
     }
 
-    public RegistrationPage setUserPhoneNumber(String number) {
-        userPhoneNumber.setValue(number);
-        userForm.put("Mobile", number);
+    public RegistrationPage setUserPhoneNumberInput(String number) {
+        userPhoneNumberInput.setValue(number);
+        userFormMap.put("Mobile", number);
         return this;
     }
 
     public RegistrationPage setBirthday(String year, String month, String day) {
         dateOfBirthInput.click();
         calendarComponents.setDate(year, month, day);
-        userForm.put("Date of Birth", day + " " + month + "," + year);
+        userFormMap.put("Date of Birth", day + " " + month + "," + year);
         return this;
     }
 
     public RegistrationPage setSubjects(String subjects) {
         subjectsInput.setValue(subjects).pressEnter();
-        userForm.put("Subjects", subjects);
+        userFormMap.put("Subjects", subjects);
         return this;
     }
 
     public RegistrationPage setHobbies(String hobbies) {
         setHobbies.$(byText(hobbies)).click();
-        userForm.put("Hobbies", hobbies);
+        userFormMap.put("Hobbies", hobbies);
         return this;
     }
 
     public RegistrationPage uploadFile(String picture) {
         uploadPicture.uploadFromClasspath(picture);
-        userForm.put("Picture", picture);
+        userFormMap.put("Picture", picture);
         return this;
     }
 
     public RegistrationPage setAddress(String address) {
         addressInput.setValue(address);
-        userForm.put("Address", address);
+        userFormMap.put("Address", address);
         return this;
     }
 
     public RegistrationPage setStateAndCity(String state, String city) {
         selectState.setValue(state).pressEnter();
         selectCity.setValue(city).pressEnter();
-        userForm.put("State and City", state);
+        userFormMap.put("State and City", state);
         return this;
     }
 
@@ -111,8 +112,8 @@ public class RegistrationPage {
 
     public void checkResults() {
 
-        for (String key : userForm.keySet()) {
-            String value = userForm.get(key);
+        for (String key : userFormMap.keySet()) {
+            String value = userFormMap.get(key);
             resultTable.$(byText(key)).parent().shouldHave(text(value));
         }
     }

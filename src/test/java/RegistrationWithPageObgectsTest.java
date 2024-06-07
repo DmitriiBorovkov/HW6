@@ -11,7 +11,7 @@ public class RegistrationWithPageObgectsTest extends TestBase {
                 .setNameAndLastname("Dmitrii", "Borovkov")
                 .setEmail("test@test.com")
                 .setGender("Male")
-                .setUserPhoneNumber("7999888770")
+                .setUserPhoneNumberInput("7999888770")
                 .setBirthday("1987", "February", "09")
                 .setSubjects("Maths")
                 .setHobbies("Sports")
@@ -30,7 +30,7 @@ public class RegistrationWithPageObgectsTest extends TestBase {
         registrationPage.openPage()
                 .setNameAndLastname("Dmitrii", "Borovkov")
                 .setGender("Male")
-                .setUserPhoneNumber("7999888770")
+                .setUserPhoneNumberInput("7999888770")
                 .setBirthday("1987", "February", "09")
                 .submitForm()
 
@@ -44,7 +44,7 @@ public class RegistrationWithPageObgectsTest extends TestBase {
         registrationPage.openPage()
                 .setNameAndLastname("Dmitrii", "Borovkov")
               //.setGender("Male") - обязательное поле не заполнено
-                .setUserPhoneNumber("7999888770")
+                .setUserPhoneNumberInput("7999888770")
                 .setBirthday("1987", "February", "09")
                 .submitForm()
 
